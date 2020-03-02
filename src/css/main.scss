@@ -1,0 +1,409 @@
+@import "mq";
+@import "fonts";
+@import "palette";
+
+// Uncomment for embeds
+@import "embed";
+// Uncomment for full screen (including immersive article main media)
+//@import "fullscreen";
+
+.element-atom,
+.interactive-atom {
+    margin: 0 !important;
+}
+
+
+
+// Default breakpoints from Frontend
+// Use mc() in place of mq() so your thrashers don't get broken
+$mq-breakpoints: (mobile: 320px,
+    mobileMedium: 375px,
+    mobileLandscape: 480px,
+    phablet: 660px,
+    tablet: 740px,
+    desktop: 980px,
+    leftCol: 1140px,
+    wide: 1300px);
+
+// update 'class-name' with yours
+$containerName: corona-carousel;
+// colours pulled from shared/css/_palette.sass
+$backgroundColor: #f6f6f6;
+$textColor: $neutral-7;
+$buttonColor: $neutral-7;
+$buttonHoverColor: $neutral-46;
+$paginationColor: #121212;
+$topBorderColor: #ff4e36;
+
+// this targets the container your thrasher is put inside on Fronts
+section##{$containerName} {
+    width: 100%;
+    position: relative;
+    padding: 0 !important;
+    overflow: hidden;
+    background-color: #fff;
+
+    .fc-container__inner,
+    .fc-slice,
+    .facia-snap {
+        overflow: hidden;
+    }
+
+    .facia-snap {
+        padding: 0;
+    }
+}
+
+// .interactive-atom-fence {
+//     overflow: hidden;
+// }
+
+.#{$containerName} {
+    width: 100%;
+    height: 500px !important;
+    background-color: $backgroundColor;
+    padding: 0 0;
+    overflow: hidden;
+    border-top: 2px solid $topBorderColor;
+    margin-bottom: 0;
+
+    @media(min-width:374px) {
+        height: 550px !important;
+    }
+
+    @media(min-width:479px) {
+        height: 600px !important;
+    }
+
+    @media (min-width: 619px) {
+        height: 600px !important;
+    }
+
+    &__headline {
+        color: $textColor;
+        font-family: "Guardian Headline Full", "Guardian Egyptian Web", Georgia,
+            serif;
+        font-size: 24px;
+        line-height: 115%;
+        margin: 4px 0 10px 10px;
+        width: 90%;
+
+        @include mq(mobileMedium) {
+            font-size: 28px;
+        }
+
+        @include mq(mobileLandscape) {
+            font-size: 24px;
+        }
+
+        @include mq(phablet) {
+            font-size: 34px;
+            margin: 4px 0 19px 10px;
+        }
+
+        span {
+            color: $topBorderColor;
+        }
+    }
+
+    &__pagination {
+        display: flex;
+        flex-direction: row;
+
+        &__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid $paginationColor;
+            margin-right: 4px;
+            margin-bottom: 8px;
+        }
+
+        .active {
+            background-color: $paginationColor;
+        }
+    }
+
+    &__slides {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        // left: 10px;
+        // overflow: hidden;
+        width: 100%;
+
+        &__slide {
+            flex: none;
+            width: 100%;
+            padding-left: 10px;
+            padding-right: 10px;
+            box-sizing: border-box;
+
+            p {
+                font-family: "Guardian Text Egyptian Web", Georgia, serif;
+                font-size: 17px;
+                line-height: 135%;
+                margin-top: 4px;
+
+                @media (min-width:619px) {
+                    margin-top: 10px;
+                    width: 90%;
+                }
+
+                &::before {
+                    content: "";
+                    background-color: #999;
+                    display: inline-block;
+                    width: 14px;
+                    height: 14px;
+                    border-radius: 50%;
+                    margin-right: 4px;
+                    margin-bottom: -1px;
+                }
+
+                span {
+                    font-weight: 800;
+                }
+            }
+        }
+
+        &__image {
+            height: auto;
+            width: 100%;
+        }
+    }
+
+
+    .atom--snippet__feedback {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: 28px;
+        right: 10px;
+
+        &:hover {
+            cursor: default;
+        }
+
+        @media(min-width:619px) {
+            bottom: 4px;
+        }
+
+        &__text {
+            font-size: 15px;
+            line-height: 115%;
+            font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 200;
+            margin-right: 4px;
+            color: $topBorderColor;
+        }
+
+        button {
+            margin-left: 4px;
+            background-color: #121212;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+
+            svg {
+                width: 20px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &__dislike {
+            transform: scale(-1);
+        }
+    }
+
+    &__footer {
+        position: relative;
+        margin-top: -50px;
+    }
+}
+
+
+// this removes margins from Android / iOS view
+.interactive-atom {
+    margin: 0;
+    overflow: hidden;
+}
+
+
+
+.swiper-pagination {
+    margin-left: 50%;
+    position: absolute;
+    bottom: 70px;
+    transform: translateX(-50%);
+
+    @media(min-width:480px) {
+        bottom: 50px;
+    }
+
+    @media(min-width:619px) {
+        bottom: 40px;
+    }
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    // border: 1px solid $paginationColor;
+    background-color: #dcdcdc;
+    margin-right: 8px;
+    margin-bottom: 8px;
+
+    &:nth-last-child(1) {
+        margin-right: 0;
+    }
+}
+
+.swiper-pagination-bullet-active {
+    background-color: $paginationColor;
+}
+
+
+
+
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    top: 34%;
+    width: calc(var(--swiper-navigation-size) / 44 * 27);
+    height: var(--swiper-navigation-size);
+    margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--swiper-navigation-color, var(--swiper-theme-color));
+    display: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    @include mq(mobileLandscape) {
+        display: block;
+    }
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+    opacity: 0.35;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    font-family: swiper-icons;
+    font-size: var(--swiper-navigation-size);
+    text-transform: none !important;
+    letter-spacing: 0;
+    text-transform: none;
+    font-variant: initial;
+}
+
+.swiper-button-prev,
+.swiper-container-rtl .swiper-button-next {
+    left: 10px;
+    right: auto;
+}
+
+.swiper-button-prev:after,
+.swiper-container-rtl .swiper-button-next:after {
+    content: '';
+    background-image: url('https://uploads.guim.co.uk/2020/02/27/left-arrow-hf.svg');
+    width: 40px;
+    height: 30px;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 8px;
+}
+
+.swiper-button-next,
+.swiper-container-rtl .swiper-button-prev {
+    right: 10px;
+    left: auto;
+}
+
+.swiper-button-next:after,
+.swiper-container-rtl .swiper-button-prev:after {
+    content: '';
+    background-image: url('https://uploads.guim.co.uk/2020/02/27/right-arrow-hf.svg');
+    width: 40px;
+    height: 30px;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 8px;
+}
+
+.swiper-button-prev.swiper-button-white,
+.swiper-button-next.swiper-button-white {
+    --swiper-navigation-color: #ffffff;
+}
+
+.swiper-button-prev.swiper-button-black,
+.swiper-button-next.swiper-button-black {
+    --swiper-navigation-color: #000000;
+}
+
+.swiper-button-lock {
+    display: none;
+}
+
+
+
+
+.nice-message {
+    display: none;
+}
+
+
+.submitted {
+    .hide-message {
+        display: none;
+    }
+
+    .nice-message {
+        display: block;
+    }
+}
+
+
+
+
+
+
+.android {
+    // overflow: hidden;
+    // margin: 0;
+    // padding: 0;
+
+    .corona-carousel {
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            display: block !important;
+        }
+    }
+
+}
