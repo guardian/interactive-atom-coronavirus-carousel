@@ -12,28 +12,34 @@
     margin: 0 !important;
 }
 
-
+#gd-carousel {
+    min-height: 80px;
+}
 
 // Default breakpoints from Frontend
 // Use mc() in place of mq() so your thrashers don't get broken
 $mq-breakpoints: (mobile: 320px,
-    mobileMedium: 375px,
+    mobileMedium: 355px,
     mobileLandscape: 480px,
     phablet: 660px,
     tablet: 740px,
     desktop: 980px,
     leftCol: 1140px,
-    wide: 1300px);
+    wide: 1300px,
+    support-desktop: 300px,
+    support-wide: 380px,
+    tweakSize: 410px,
+    inline-mobileLandscape: 440px,
+    inline-desktop: 620px);
 
 // update 'class-name' with yours
 $containerName: corona-carousel;
-// colours pulled from shared/css/_palette.sass
-$backgroundColor: #f6f6f6;
+$backgroundColor: #fff;
 $textColor: $neutral-7;
 $buttonColor: $neutral-7;
 $buttonHoverColor: $neutral-46;
 $paginationColor: #121212;
-$topBorderColor: #ff4e36;
+$topBorderColor: #C70000;
 
 // this targets the container your thrasher is put inside on Fronts
 section##{$containerName} {
@@ -41,7 +47,6 @@ section##{$containerName} {
     position: relative;
     padding: 0 !important;
     overflow: hidden;
-    background-color: #fff;
 
     .fc-container__inner,
     .fc-slice,
@@ -59,24 +64,17 @@ section##{$containerName} {
 // }
 
 .#{$containerName} {
+    // display: none;
     width: 100%;
-    height: 500px !important;
-    background-color: $backgroundColor;
+    height: 430px;
     padding: 0 0;
     overflow: hidden;
-    border-top: 2px solid $topBorderColor;
+    border-top: 2px solid #121212;
     margin-bottom: 0;
+    background-color: white;
 
-    @media(min-width:374px) {
-        height: 550px !important;
-    }
-
-    @media(min-width:479px) {
-        height: 600px !important;
-    }
-
-    @media (min-width: 619px) {
-        height: 600px !important;
+    @include mq(inline-desktop) {
+        height: 550px;
     }
 
     &__headline {
@@ -85,7 +83,7 @@ section##{$containerName} {
             serif;
         font-size: 24px;
         line-height: 115%;
-        margin: 4px 0 10px 10px;
+        margin: 4px 0 10px 4px;
         width: 90%;
 
         @include mq(mobileMedium) {
@@ -109,10 +107,36 @@ section##{$containerName} {
     &__pagination {
         display: flex;
         flex-direction: row;
+        margin-left: 4px;
+        margin-bottom: 8px;
+        outline: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: none;
+            border: none;
+        }
+
+        &:active {
+            outline: none;
+            border: none;
+        }
+
+
+        @include mq(inline-desktop) {
+            margin-bottom: 0;
+            position: absolute;
+            z-index: 20;
+            right: 4px;
+            top: 8px;
+        }
 
         &__dot {
-            width: 10px;
-            height: 10px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             border: 1px solid $paginationColor;
             margin-right: 4px;
@@ -141,29 +165,33 @@ section##{$containerName} {
 
             p {
                 font-family: "Guardian Text Egyptian Web", Georgia, serif;
-                font-size: 17px;
-                line-height: 135%;
+                font-size: 24px;
+                line-height: 115%;
                 margin-top: 4px;
+                font-variant-numeric: lining-nums;
 
-                @media (min-width:619px) {
+                @media (min-width: 619px) {
                     margin-top: 10px;
                     width: 90%;
                 }
 
-                &::before {
-                    content: "";
-                    background-color: #999;
-                    display: inline-block;
-                    width: 14px;
-                    height: 14px;
-                    border-radius: 50%;
-                    margin-right: 4px;
-                    margin-bottom: -1px;
+                span {
+                    font-family: "Guardian Titlepiece", "Guardian Headline Full", "Guardian Egyptian Web", Georgia, serif;
+                    font-weight: bold;
+                    color: $topBorderColor;
+                    font-variant-numeric: lining-nums;
                 }
 
-                span {
-                    font-weight: 800;
-                }
+                // &::before {
+                //     content: "";
+                //     background-color: #999;
+                //     display: inline-block;
+                //     width: 14px;
+                //     height: 14px;
+                //     border-radius: 50%;
+                //     margin-right: 4px;
+                //     margin-bottom: -1px;
+                // }
             }
         }
 
@@ -172,7 +200,6 @@ section##{$containerName} {
             width: 100%;
         }
     }
-
 
     .atom--snippet__feedback {
         display: flex;
@@ -185,14 +212,15 @@ section##{$containerName} {
             cursor: default;
         }
 
-        @media(min-width:619px) {
+        @media (min-width: 619px) {
             bottom: 4px;
         }
 
         &__text {
             font-size: 15px;
             line-height: 115%;
-            font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial,
+                "Lucida Grande", sans-serif;
             font-weight: 200;
             margin-right: 4px;
             color: $topBorderColor;
@@ -225,28 +253,10 @@ section##{$containerName} {
     }
 }
 
-
 // this removes margins from Android / iOS view
 .interactive-atom {
     margin: 0;
     overflow: hidden;
-}
-
-
-
-.swiper-pagination {
-    margin-left: 50%;
-    position: absolute;
-    bottom: 70px;
-    transform: translateX(-50%);
-
-    @media(min-width:480px) {
-        bottom: 50px;
-    }
-
-    @media(min-width:619px) {
-        bottom: 40px;
-    }
 }
 
 .swiper-container {
@@ -256,16 +266,13 @@ section##{$containerName} {
     position: relative;
 }
 
-
-
 .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     // border: 1px solid $paginationColor;
     background-color: #dcdcdc;
     margin-right: 8px;
-    margin-bottom: 8px;
 
     &:nth-last-child(1) {
         margin-right: 0;
@@ -274,10 +281,8 @@ section##{$containerName} {
 
 .swiper-pagination-bullet-active {
     background-color: $paginationColor;
+    outline: none;
 }
-
-
-
 
 .swiper-button-prev,
 .swiper-button-next {
@@ -326,8 +331,8 @@ section##{$containerName} {
 
 .swiper-button-prev:after,
 .swiper-container-rtl .swiper-button-next:after {
-    content: '';
-    background-image: url('https://uploads.guim.co.uk/2020/02/27/left-arrow-hf.svg');
+    content: "";
+    background-image: url("https://uploads.guim.co.uk/2020/02/27/left-arrow-hf.svg");
     width: 40px;
     height: 30px;
     display: block;
@@ -345,8 +350,8 @@ section##{$containerName} {
 
 .swiper-button-next:after,
 .swiper-container-rtl .swiper-button-prev:after {
-    content: '';
-    background-image: url('https://uploads.guim.co.uk/2020/02/27/right-arrow-hf.svg');
+    content: "";
+    background-image: url("https://uploads.guim.co.uk/2020/02/27/right-arrow-hf.svg");
     width: 40px;
     height: 30px;
     display: block;
@@ -370,13 +375,9 @@ section##{$containerName} {
     display: none;
 }
 
-
-
-
 .nice-message {
     display: none;
 }
-
 
 .submitted {
     .hide-message {
@@ -387,11 +388,6 @@ section##{$containerName} {
         display: block;
     }
 }
-
-
-
-
-
 
 .android {
     // overflow: hidden;
@@ -405,5 +401,4 @@ section##{$containerName} {
             display: block !important;
         }
     }
-
 }

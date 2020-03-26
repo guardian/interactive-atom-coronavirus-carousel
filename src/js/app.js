@@ -1,27 +1,20 @@
 // js code here
 import Swiper from "swiper";
 import "ophan-tracker-js";
-import template from 'raw-loader!./../templates/main.html'
-
-// const emptyDiv = document.getElementById("gd-carousel");
-// console.log(emptyDiv);
-// emptyDiv.innerHTML = template;
-
-document.getElementById("gd-carousel").innerHTML = template;
-
-
+import template from "./../templates/main.html";
+const contentFrame = document.getElementById("gd-carousel");
+contentFrame.innerHTML = template;
 
 var swiper = new Swiper(".swiper-container", {
   pagination: {
-    el: ".swiper-pagination"
+    el: ".swiper-pagination",
+    clickable: true
   },
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev"
   }
 });
-
-
 
 const feedbackBtn = document.querySelectorAll(".atom__button");
 const feedbackBox = document.querySelector(".atom--snippet__feedback");
@@ -33,8 +26,7 @@ feedbackBtn.forEach(feedbackBtn => {
 });
 
 
-
-
+// resize
 setTimeout(() => {
   if (window.resize) {
     const html = document.querySelector("html");
@@ -49,29 +41,38 @@ setTimeout(() => {
   }
 }, 100);
 
+
+// Add URL to datalinkname
 var urlGetter = window.parent.location;
+
 var nextButton = document.querySelector(".swiper-button-next");
+var prevButton = document.querySelector(".swiper-button-prev")
 nextButton.setAttribute(
   "data-link-name",
-  "corona carousel : next-arrow : " + urlGetter
+  "corona shopping carousel : next-arrow : " + urlGetter
 );
+prevButton.setAttribute(
+  "data-link-name",
+  "corona shopping carousel : prev-arrow : " + urlGetter
+)
+
 var thumbsUp = document.querySelector(".js-thumbs-up");
 var thumbsDown = document.querySelector(".js-thumbs-down");
 thumbsUp.setAttribute(
   "data-link-name",
-  "corona carousel : thumbs-up : " + urlGetter
+  "corona shopping carousel : thumbs-up : " + urlGetter
 );
 thumbsDown.setAttribute(
   "data-link-name",
-  "corona carousel : thumbs-down : " + urlGetter
+  "corona shopping carousel : thumbs-down : " + urlGetter
 );
 
 console.log(urlGetter);
 
 
-
-
-// var isAndroidApp = (detect.isAndroid() && window.location.origin === "file://") ? true : false;
+// disable swipe on android
+var isAndroidApp =
+  detect.isAndroid() && window.location.origin === "file://" ? true : false;
 var androidclass = document.querySelector(".android");
 var isAndroidApp = false;
 if (!androidclass == undefined || null) {
@@ -102,4 +103,4 @@ if (isAndroidApp && window.GuardianJSInterface.registerRelatedCardsTouch) {
   });
 }
 
-console.log("v1.4");
+console.log("v1.7");
