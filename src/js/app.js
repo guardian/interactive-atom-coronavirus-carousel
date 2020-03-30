@@ -1,11 +1,11 @@
 // js code here
 import Swiper from "swiper";
 import "ophan-tracker-js";
-import template from 'raw-loader!./../templates/main.html'
+import template from './../templates/main.html'
 
-// const emptyDiv = document.getElementById("gd-carousel");
-// console.log(emptyDiv);
-// emptyDiv.innerHTML = template;
+const emptyDiv = document.getElementById("gd-carousel");
+console.log(emptyDiv);
+emptyDiv.innerHTML = template;
 
 document.getElementById("gd-carousel").innerHTML = template;
 
@@ -13,7 +13,8 @@ document.getElementById("gd-carousel").innerHTML = template;
 
 var swiper = new Swiper(".swiper-container", {
   pagination: {
-    el: ".swiper-pagination"
+    el: ".swiper-pagination",
+    clickable: true
   },
   navigation: {
     nextEl: ".swiper-button-next",
